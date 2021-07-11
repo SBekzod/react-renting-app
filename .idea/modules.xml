@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/react-home-app.iml" filepath="$PROJECT_DIR$/.idea/react-home-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../react-renting-app/.idea/react-renting-app.iml" filepath="$PROJECT_DIR$/../react-renting-app/.idea/react-renting-app.iml" />
     </modules>
   </component>
 </project>
