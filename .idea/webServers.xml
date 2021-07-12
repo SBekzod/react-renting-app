@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b681eeb9-adb5-47ef-8277-a485ad8c6d6a" name="vps_host:renting-react" url="http://31.220.109.104:3000">
+        <fileTransfer rootFolder="/home/martin" accessType="SFTP" host="31.220.109.104" port="22" sshConfigId="90252ccd-9659-4648-82f3-54e09b2286de" sshConfig="root@31.220.109.104:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
