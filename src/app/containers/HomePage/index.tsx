@@ -11,7 +11,7 @@ const PageContainer = styled.div`
     h-full
     items-center
     overflow-x-hidden
-    `}
+    `};
 `;
 
 export function HomePage() {
