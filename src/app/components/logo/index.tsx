@@ -34,6 +34,6 @@ export function Logo() {
         <Image>
             <img src={CartLogo}/>
         </Image>
-        <LogoTextContainer>MyTime.</LogoTextContainer>
+        <LogoTextContainer>buyTime.</LogoTextContainer>
     </LogoContainer>;
 }
