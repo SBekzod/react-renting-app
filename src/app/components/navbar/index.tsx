@@ -5,6 +5,8 @@ import { Logo } from '../logo';
 
 const NavbarContainer = styled.div`
   min-height: 68px;
+  display: flex;
+  
   ${tw`
     w-full
     max-w-2xl
