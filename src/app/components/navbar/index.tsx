@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Logo } from '../logo';
+import { NavItems } from './navItems';
 
 const NavbarContainer = styled.div`
-  min-height: 68px;
-  display: flex;
-  
+  min-height: 68px;  
   ${tw`
     w-full
     max-w-2xl
@@ -19,8 +18,18 @@ const NavbarContainer = styled.div`
     `};
 `;
 
+const LogoContainer = styled.div`
+  ${tw`
+
+  `}
+`;
+
+
 export function Navbar() {
     return <NavbarContainer>
-       <Logo/>
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
+      <NavItems/>
     </NavbarContainer>;
 };

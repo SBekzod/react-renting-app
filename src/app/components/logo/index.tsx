@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import CartLogo from '../../../assets/images/time-logo.png';
+import CartLogoImg from '../../../assets/images/car-logo.png';
 
 const LogoContainer = styled.div`
     ${tw`
@@ -11,7 +11,7 @@ const LogoContainer = styled.div`
     `};
 `; 
 
-const LogoTextContainer = styled.div`
+const LogoText = styled.div`
     ${tw`
     text-xl
     md:text-2xl
@@ -32,8 +32,8 @@ const Image = styled.div`
 export function Logo() {
     return <LogoContainer>
         <Image>
-            <img src={CartLogo}/>
+            <img src={CartLogoImg}/>
         </Image>
-        <LogoTextContainer>buyTime.</LogoTextContainer>
+        <LogoText>Yourcar.</LogoText>
     </LogoContainer>;
 }
