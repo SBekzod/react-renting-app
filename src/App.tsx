@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 function App() {
    return <AppContainer>
       <HomePage />
-   </AppContainer>; 
+   </AppContainer>;
 }
 
 export default App;

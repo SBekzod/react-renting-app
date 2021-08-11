@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
-import {slide as Menu} from "react-burger-menu";
-import {useMediaQuery} from "react-responsive";
+import { slide as Menu } from "react-burger-menu";
+import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../responsive/index";
 import menuStyles from "./menuStyles";
 
@@ -13,8 +13,7 @@ const ListContainer = styled.ul`
  `};
 `;
 
-
-const NavItem = styled.li`
+const NavItem = styled.li<{ mob_menu?: any }>`
  ${tw`
    font-medium
    text-xs
@@ -28,28 +27,39 @@ const NavItem = styled.li`
    ease-in-out
    hover:text-gray-700
  `};
+
+   ${({ mob_menu }) => mob_menu && css`
+      ${tw`
+         text-white
+         text-xl
+         mb-3
+         focus:text-white
+      `}
+   `}
+
 `;
 
-export function NavItems() {  
 
-   const isMobile = useMediaQuery({maxWidth: SCREENS.sm});
+export function NavItems() {
+
+   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
    console.log(`isMobile: ${isMobile}`);
-   if(isMobile) {
+   if (isMobile) {
       return <Menu right styles={menuStyles}>
          <ListContainer>
-            <NavItem>
+            <NavItem mob_menu>
                <a href="#">Home</a>
             </NavItem>
-            <NavItem>
+            <NavItem mob_menu>
                <a href="#">Cars</a>
             </NavItem>
-            <NavItem>
+            <NavItem mob_menu>
                <a href="#">Services</a>
             </NavItem>
-            <NavItem>
+            <NavItem mob_menu>
                <a href="#">Contact</a>
             </NavItem>
-      </ListContainer>
+         </ListContainer>
       </Menu>
    }
 
