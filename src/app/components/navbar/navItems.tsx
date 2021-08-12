@@ -64,7 +64,7 @@ export function NavItems() {
    }
 
    return <ListContainer>
-      <NavItem>
+      <NavItem style={{"color": "red"}} >
          <a href="#">Home</a>
       </NavItem>
       <NavItem>
