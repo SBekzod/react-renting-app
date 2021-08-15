@@ -98,9 +98,9 @@ const DateCalendar = styled(Calendar)`
     top: 3.5em;
     left: -2em;
   }
-` as any;
+`as any; 
 
-export function BookCard() {
+export function BookCard() { 
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [isStartCalendarOpen, setStartCalendarOpen] = useState(false);
   const [returnDate, setReturnDate] = useState<Date>(new Date());

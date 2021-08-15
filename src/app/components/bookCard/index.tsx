@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import { faCalendarAlt, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 import { Button } from '../button';
 import { Marginer } from '../marginer';
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { SCREENS } from '../responsive';
 
 const CardContainer = styled.div`
     min-height: 4.3em;
@@ -79,12 +80,21 @@ const LineSeparator = styled.span`
     `}
 `;
 
-const DateCalendar = styled(Calendar)`
+const DateCalendar = styled(Calendar)<{offset?: any}>`
     position: absolute;
     max-width: none;
-    top: 3.5em;
-    left: -2em;
-    user-select: none
+    user-select: none;
+    top: 2em;
+    left: 0;
+    
+    ${({offset}) => offset && css`
+        left: -6em;
+    `}
+
+    @media (min-width: ${SCREENS.md}) {
+        top: 3.5em;
+        left: -1em;
+    }
 `;
 
 export function BookCard() {
@@ -125,7 +135,7 @@ export function BookCard() {
             <SmallIcon>
                 <FontAwesomeIcon icon={isReturnCalendarOpen ? faCaretUp : faCaretDown}  />
             </SmallIcon>
-            {isReturnCalendarOpen && <DateCalendar onChange={setReturnDate} value={returnDate} />}
+            {isReturnCalendarOpen && <DateCalendar offset onChange={setReturnDate} value={returnDate} />}
         </ItemContainer>
         <Marginer direction="horizontal" margin="2em" />
         <Button text="Book Your Ride"></Button>
