@@ -21,6 +21,7 @@ export function HomePage() {
     return <PageContainer>
         <Navbar />
         <TopSection />
+        <Marginer direction="vertical" margin="4em" />
         <BookCard />
     </PageContainer>;
 }
