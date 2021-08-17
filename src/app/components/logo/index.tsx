@@ -1,24 +1,35 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
 import CartLogoImg from '../../../assets/images/car-logo.png';
+
+interface ILogoProps {
+    color?: 'white' | 'dark'
+}
+
 
 const LogoContainer = styled.div`
     ${tw`
     flex
     items-center
     `};
-`; 
+`;
 
 const LogoText = styled.div`
     ${tw`
-    text-xl
-    md:text-2xl
-    text-black
-    m-1
+        text-xl
+        md:text-2xl
+        text-black
+        m-1
     `};
-`; 
+
+    ${({ color }: any) => color === 'white' ?
+        css`${tw`text-white`}`
+       :
+        css`${tw`text-black`}`
+    }
+`;
 
 const Image = styled.div`
     width:auto;
@@ -29,11 +40,14 @@ const Image = styled.div`
     }
 `;
 
-export function Logo() {
+export function Logo(props: ILogoProps) {
+
+    const {color } = props;
+
     return <LogoContainer>
         <Image>
-            <img src={CartLogoImg}/>
+            <img src={CartLogoImg} />
         </Image>
-        <LogoText>Yourcar.</LogoText>
+        <LogoText color={color || 'dark'}>Yourcar.</LogoText>
     </LogoContainer>;
 }
