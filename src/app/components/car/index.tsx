@@ -141,7 +141,6 @@ export function Car(props: ICarProps) {
     dailyPrice,
     monthlyPrice,
     mileage,
-    gearType,
     gas,
   } = props;
 
@@ -173,7 +172,6 @@ export function Car(props: ICarProps) {
           <SmallIcon>
             <FontAwesomeIcon icon={faEllipsisH} />
           </SmallIcon>
-          <CarInfo>{gearType}</CarInfo>
         </CarDetail>
         <CarDetail>
           <SmallIcon>

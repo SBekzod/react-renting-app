@@ -6,7 +6,6 @@ query GetCars {
         id
         name 
         milage
-        gearType
         gas 
         thumbnailUrl
         dailyPrice

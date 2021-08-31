@@ -58,7 +58,6 @@ export function TopCars() {
       "https://cdn.jdpower.com/Models/640x480/2017-Audi-S3-PremiumPlus.jpg",
     dailyPrice: 70,
     monthlyPrice: 1600,
-    gearType: "Auto",
     gas: "Petrol",
   };
   
@@ -69,7 +68,6 @@ export function TopCars() {
       "https://shinewiki.com/wp-content/uploads/2019/11/honda-city.jpg",
     dailyPrice: 50,
     monthlyPrice: 1500,
-    gearType: "Auto",
     gas: "Petrol",
   };
 
@@ -82,6 +80,12 @@ export function TopCars() {
     <Car {... testCar2} />,
     <Car {... testCar} />
   ];
+
+
+  const [allCars, setAllCars] = useState([]);
+  
+
+
 
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
 
