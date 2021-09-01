@@ -7,6 +7,7 @@ import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../components/responsive";
+import carService from "../../services/carService";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -60,7 +61,7 @@ export function TopCars() {
     monthlyPrice: 1600,
     gas: "Petrol",
   };
-  
+
   const testCar2: ICar = {
     name: "HONDA cITY 5 Seater Car",
     mileage: "20k",
@@ -72,19 +73,28 @@ export function TopCars() {
   };
 
   const cars = [
-    <Car {... testCar2} />,
-    <Car {... testCar} />,
-    <Car {... testCar2} />,
-    <Car {... testCar2} />,
-    <Car {... testCar} />,
-    <Car {... testCar2} />,
-    <Car {... testCar} />
+    <Car {...testCar2} />,
+    <Car {...testCar} />,
+    <Car {...testCar2} />,
+    <Car {...testCar2} />,
+    <Car {...testCar} />,
+    <Car {...testCar2} />,
+    <Car {...testCar} />
   ];
 
 
-  const [allCars, setAllCars] = useState([]);
-  
+  useEffect(() => {
+    fetchTopCard();
+  }, []);
 
+  const fetchTopCard = async () => {
+    try {
+      const cars = await carService.getCars();
+      console.log('CARS: ', cars);
+    } catch(err) {
+      throw err;
+    }
+  }
 
 
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
@@ -92,45 +102,45 @@ export function TopCars() {
   return (
     <TopCarsContainer>
       <Title>Explore Our Top Deals</Title>
-        <CarsContainer>
-          <Carousel
-            value={current}
-            onChange={setCurrent}
-            slides={cars}
-            plugins={[
-              "clickToChange",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 3,
+      <CarsContainer>
+        <Carousel
+          value={current}
+          onChange={setCurrent}
+          slides={cars}
+          plugins={[
+            "clickToChange",
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 3,
+              },
+            },
+          ]}
+          breakpoints={{
+            640: {
+              plugins: [
+                {
+                  resolve: slidesToShowPlugin,
+                  options: {
+                    numberOfSlides: 1,
+                  },
                 },
-              },
-            ]}
-            breakpoints={{
-              640: {
-                plugins: [
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 1,
-                    },
+              ],
+            },
+            900: {
+              plugins: [
+                {
+                  resolve: slidesToShowPlugin,
+                  options: {
+                    numberOfSlides: 2,
                   },
-                ],
-              },
-              900: {
-                plugins: [
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 2,
-                    },
-                  },
-                ],
-              },
-            }}
-          />
-          <Dots value={current} onChange={setCurrent} number={numberOfDots} />
-        </CarsContainer>
+                },
+              ],
+            },
+          }}
+        />
+        <Dots value={current} onChange={setCurrent} number={numberOfDots} />
+      </CarsContainer>
     </TopCarsContainer>
   );
 }

@@ -1,11 +1,11 @@
 import { gql } from "graphql-tag";
 
 export const GET_ALL_CARS = gql`
-query GetCars {
+query {
     cars {
         id
         name 
-        milage
+        mileage
         gas 
         thumbnailUrl
         dailyPrice
