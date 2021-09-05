@@ -10,8 +10,10 @@ import { SCREENS } from "../../components/responsive";
 import carService from "../../services/carService";
 import { Car_Type } from "../../services/carService/_type/GetCars";
 import { setTopCars } from "./slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { makeSelectTopCars } from "./selectors";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -49,20 +51,24 @@ const CarsContainer = styled.div`
   `};
 `;
 
-
 const actionDispatch = (dispatch: Dispatch) => ({
   setTopCars: (cars: Car_Type[]) => dispatch(setTopCars(cars)),
 });
 
-
+const stateSelector = createSelector(makeSelectTopCars, (topCars) => ({
+  topCars,
+}));
 
 export function TopCars() {
-
   const [current, setCurrent] = useState(0);
 
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-  
-  const {setTopCars} = actionDispatch(useDispatch());
+
+  const { setTopCars } = actionDispatch(useDispatch());
+  const { topCars } = useSelector(stateSelector);
+
+  console.log("getting Reducer state value");
+  console.log("topCars: ", topCars);
 
   const testCar: ICar = {
     name: "Audi S3 Car",
@@ -89,9 +95,8 @@ export function TopCars() {
     <Car {...testCar2} />,
     <Car {...testCar} />,
     <Car {...testCar2} />,
-    <Car {...testCar} />
+    <Car {...testCar} />,
   ];
-
 
   useEffect(() => {
     fetchTopCard();
@@ -100,15 +105,15 @@ export function TopCars() {
   const fetchTopCard = async () => {
     try {
       const cars = await carService.getCars();
-      console.log('CARS: ', cars);
-      if(cars) {
+      console.log("setting Reducer state value");
+      console.log("CARS: ", cars);
+      if (cars) {
         setTopCars(cars);
       }
-    } catch(err) {
+    } catch (err) {
       throw err;
     }
-  }
-
+  };
 
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
 
