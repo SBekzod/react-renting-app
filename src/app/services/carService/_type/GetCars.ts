@@ -1,5 +1,4 @@
-
-export interface Car {
+export interface Car_Type {
   _typename: "Car";
   id: string;
   name: string;
@@ -11,5 +10,5 @@ export interface Car {
 }
 
 export interface GetCars {
-    cars: Car[];
+  cars: Car_Type[];
 }
