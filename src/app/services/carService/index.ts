@@ -12,8 +12,8 @@ class CarService {
       });
     console.log("response::", response);
 
-    if (response && response.data) {
-      return response.data as Car_Type[];
+    if (response && response.data && response.data.cars) {
+      return response.data.cars as Car_Type[];
     }
 
     return [];

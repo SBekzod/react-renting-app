@@ -8,6 +8,10 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../components/responsive";
 import carService from "../../services/carService";
+import { Car_Type } from "../../services/carService/_type/GetCars";
+import { setTopCars } from "./slice";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -46,12 +50,20 @@ const CarsContainer = styled.div`
 `;
 
 
+const actionDispatch = (dispatch: Dispatch) => ({
+  setTopCars: (cars: Car_Type[]) => dispatch(setTopCars(cars)),
+});
+
+
 
 export function TopCars() {
 
   const [current, setCurrent] = useState(0);
 
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
+  
+  const {setTopCars} = actionDispatch(useDispatch());
+
   const testCar: ICar = {
     name: "Audi S3 Car",
     mileage: "10k",
@@ -61,7 +73,6 @@ export function TopCars() {
     monthlyPrice: 1600,
     gas: "Petrol",
   };
-
   const testCar2: ICar = {
     name: "HONDA cITY 5 Seater Car",
     mileage: "20k",
@@ -71,7 +82,6 @@ export function TopCars() {
     monthlyPrice: 1500,
     gas: "Petrol",
   };
-
   const cars = [
     <Car {...testCar2} />,
     <Car {...testCar} />,
@@ -91,6 +101,9 @@ export function TopCars() {
     try {
       const cars = await carService.getCars();
       console.log('CARS: ', cars);
+      if(cars) {
+        setTopCars(cars);
+      }
     } catch(err) {
       throw err;
     }
