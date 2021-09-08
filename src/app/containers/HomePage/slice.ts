@@ -3,6 +3,7 @@ import { IHomePageState } from "../../../typings/type";
 
 const initialState: IHomePageState = {
   topCars: [],
+  testCart: []
 };
 
 const homePageSlice = createSlice({
@@ -12,8 +13,11 @@ const homePageSlice = createSlice({
     setTopCars: (state, action) => {
       state.topCars = action.payload;
     },
+    setTestCart: (state, action) => {
+      state.testCart = action.payload;
+    },
   },
 });
 
-export const { setTopCars } = homePageSlice.actions;
+export const { setTopCars, setTestCart } = homePageSlice.actions;
 export default homePageSlice.reducer;

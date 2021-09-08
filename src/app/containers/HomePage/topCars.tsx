@@ -9,11 +9,11 @@ import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../components/responsive";
 import carService from "../../services/carService";
 import { Car_Type } from "../../services/carService/_type/GetCars";
-import { setTopCars } from "./slice";
+import { setTestCart, setTopCars } from "./slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { makeSelectTopCars } from "./selectors";
+import { makeSelectTestCart, makeSelectTopCars } from "./selectors";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -53,22 +53,28 @@ const CarsContainer = styled.div`
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setTopCars: (cars: Car_Type[]) => dispatch(setTopCars(cars)),
+  setTestCart: (cart: any) => dispatch(setTestCart(cart)),
 });
 
 const stateSelector = createSelector(makeSelectTopCars, (topCars) => ({
   topCars,
 }));
+const stateSelectorCart = createSelector(makeSelectTestCart, (testCart) => ({
+  testCart,
+}));
+
 
 export function TopCars() {
+
   const [current, setCurrent] = useState(0);
-
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-
-  const { setTopCars } = actionDispatch(useDispatch());
+  const { setTopCars, setTestCart } = actionDispatch(useDispatch());
   const { topCars } = useSelector(stateSelector);
+  const { testCart } = useSelector(stateSelectorCart);
 
-  console.log("getting Reducer state value");
+  console.log("-- getting Reducer state value");
   console.log("topCars: ", topCars);
+  console.log("testCart: ", testCart);
 
   const testCar: ICar = {
     name: "Audi S3 Car",
@@ -106,9 +112,9 @@ export function TopCars() {
     try {
       const cars = await carService.getCars();
       console.log("setting Reducer state value");
-      console.log("CARS: ", cars);
       if (cars) {
         setTopCars(cars);
+        setTestCart(["hello", "martin", 33]);
       }
     } catch (err) {
       throw err;

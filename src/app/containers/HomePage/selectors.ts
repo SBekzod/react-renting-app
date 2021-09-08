@@ -7,3 +7,8 @@ export const makeSelectTopCars = createSelector(
   selectHomePage,
   (HomePage) => HomePage.topCars
 );
+
+export const makeSelectTestCart = createSelector(
+  selectHomePage,
+  (HomePage) => HomePage.testCart
+);
