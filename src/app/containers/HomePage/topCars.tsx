@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { makeSelectTestCart, makeSelectTopCars } from "./selectors";
+import axios from "axios";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -55,7 +56,6 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setTopCars: (cars: Car_Type[]) => dispatch(setTopCars(cars)),
   setTestCart: (cart: any) => dispatch(setTestCart(cart)),
 });
-
 const stateSelector = createSelector(makeSelectTopCars, (topCars) => ({
   topCars,
 }));
@@ -66,50 +66,24 @@ const stateSelectorCart = createSelector(makeSelectTestCart, (testCart) => ({
 
 export function TopCars() {
 
-  const [current, setCurrent] = useState(0);
-  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
   const { setTopCars, setTestCart } = actionDispatch(useDispatch());
   const { topCars } = useSelector(stateSelector);
   const { testCart } = useSelector(stateSelectorCart);
-
   console.log("-- getting Reducer state value");
   console.log("topCars: ", topCars);
   console.log("testCart: ", testCart);
 
-  const testCar: ICar = {
-    name: "Audi S3 Car",
-    mileage: "10k",
-    thumbnailSrc:
-      "https://cdn.jdpower.com/Models/640x480/2017-Audi-S3-PremiumPlus.jpg",
-    dailyPrice: 70,
-    monthlyPrice: 1600,
-    gas: "Petrol",
-  };
-  const testCar2: ICar = {
-    name: "HONDA cITY 5 Seater Car",
-    mileage: "20k",
-    thumbnailSrc:
-      "https://shinewiki.com/wp-content/uploads/2019/11/honda-city.jpg",
-    dailyPrice: 50,
-    monthlyPrice: 1500,
-    gas: "Petrol",
-  };
-  const cars = [
-    <Car {...testCar2} />,
-    <Car {...testCar} />,
-    <Car {...testCar2} />,
-    <Car {...testCar2} />,
-    <Car {...testCar} />,
-    <Car {...testCar2} />,
-    <Car {...testCar} />,
-  ];
-
+  const [current, setCurrent] = useState(0);
+  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });  
   useEffect(() => {
     fetchTopCard();
   }, []);
 
   const fetchTopCard = async () => {
     try {
+      let data = await axios.get('http://localhost:4007/');
+      console.log('data :', data);
+
       const cars = await carService.getCars();
       console.log("setting Reducer state value");
       if (cars) {
@@ -121,8 +95,18 @@ export function TopCars() {
     }
   };
 
+  let cars: any = [];
+  if(topCars.length > 0) {
+    cars = topCars.map(ele => {
+      return <Car {...ele} />
+    });
+  }
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
 
+
+  if(cars.length === 0) {
+    return null;
+  } 
   return (
     <TopCarsContainer>
       <Title>Explore Our Top Deals</Title>

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IHomePageState } from "../../../typings/type";
+import { IHomePageState } from "../../../typings/type"
+;
 
 const initialState: IHomePageState = {
   topCars: [],
