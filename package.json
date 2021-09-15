@@ -22,7 +22,11 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-responsive": "^8.0.3",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "express": "^4.17.1",
+=======
+    "axios": "^0.21.4",
+>>>>>>> 4512f61177c7d804fea1942dc33a44abad01c831
 =======
     "axios": "^0.21.4",
 >>>>>>> 4512f61177c7d804fea1942dc33a44abad01c831
